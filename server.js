@@ -3,20 +3,15 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 const { initDB } = require("./db");
-
-
-
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 // ── Middleware ────────────────────────────────────────────────
-app.use(cors({
-  origin: ["http://localhost:5173", "http://127.0.0.1:5173"]
-}));
+app.use(cors({ origin: true }));
 app.use(express.json());
 
 // ── Init database ─────────────────────────────────────────────
-initDB();
+initDB().catch(err => console.error("DB init error:", err.message));
 
 // ── Routes ────────────────────────────────────────────────────
 app.use("/api/events",        require("./routes/events"));
