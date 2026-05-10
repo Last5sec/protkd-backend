@@ -1,30 +1,35 @@
 const nodemailer = require("nodemailer");
 
-function createTransporter() {
-  return nodemailer.createTransport({
-    host: "smtp-relay.brevo.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "aacc41001@smtp-brevo.com",
-      pass: process.env.EMAIL_PASS,
-    },
-  });
-}
-
 async function sendEmail({ to, subject, html }) {
-  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
-    console.warn("⚠️  Email not configured — skipping. Set EMAIL_USER and EMAIL_PASS in .env");
+  if (!process.env.EMAIL_PASS) {
+    console.warn("⚠️  Email not configured — skipping.");
     return;
   }
-  const transporter = createTransporter();
-  await transporter.sendMail({
-    from: `"PTF India" <${process.env.EMAIL_USER}>`,
-    to,
-    subject,
-    html,
-  });
-  console.log(`✉️  Email sent to ${to}: ${subject}`);
+
+  try {
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": process.env.EMAIL_PASS,
+      },
+      body: JSON.stringify({
+        sender: { name: "PTF India", email: "harshtushid213@gmail.com" },
+        to: [{ email: to }],
+        subject,
+        htmlContent: html,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`Brevo API error: ${err}`);
+    }
+
+    console.log(`✉️  Email sent to ${to}: ${subject}`);
+  } catch (err) {
+    console.error("Email error:", err.message);
+  }
 }
 
 // ── Shared styles ─────────────────────────────────────────────
