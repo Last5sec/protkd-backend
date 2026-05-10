@@ -86,6 +86,9 @@ router.put("/:id", authMiddleware, async (req, res) => {
 router.delete("/:id", authMiddleware, async (req, res) => {
   try {
     const db = await getDB();
+    // Delete linked registrations first
+    await db.query("DELETE FROM event_registrations WHERE event_id = $1", [req.params.id]);
+    // Then delete the event
     const result = await db.query("DELETE FROM events WHERE id = $1", [req.params.id]);
     if (result.rowCount === 0) return res.status(404).json({ error: "Event not found" });
     res.json({ message: "Event deleted" });
