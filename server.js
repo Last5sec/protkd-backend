@@ -8,7 +8,8 @@ const PORT = process.env.PORT || 4000;
 
 // ── Middleware ────────────────────────────────────────────────
 app.use(cors({ origin: true }));
-app.use(express.json());
+app.use(express.json({ limit: "20mb" }));
+app.use(express.urlencoded({ extended: true, limit: "20mb" }));
 
 // ── Init database ─────────────────────────────────────────────
 initDB().catch(err => console.error("DB init error:", err.message));
@@ -19,7 +20,8 @@ app.use("/api/registrations", require("./routes/registrations"));
 app.use("/api/memberships",   require("./routes/memberships"));
 app.use("/api/admin",         require("./routes/admin"));
 app.use("/api/contact",       require("./routes/contact"));
-
+app.use("/api/upload",        require("./routes/upload"));
+app.use("/api/payments",      require("./routes/payments"));
 // ── Health check ──────────────────────────────────────────────
 app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
 
