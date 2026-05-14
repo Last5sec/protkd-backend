@@ -128,39 +128,39 @@ router.post("/", async (req, res) => {
     const registration_id = result.rows[0].id;
 
     // Send emails (async - don't block response)
-    Promise.all([
-      notifyEventRegistration({
-        registration_id,
-        first_name,
-        last_name,
-        email,
-        phone,
-        dob,
-        gender,
-        state,
-        city,
-        belt_rank,
-        category,
-        club_name,
-        coach_name,
-        emergency_contact,
-        notes,
-        event_title: event.title,
-        reg_fee: event.reg_fee,
-      }),
-      confirmEventRegistration({
-        first_name,
-        last_name,
-        email,
-        registration_id,
-        event_title: event.title,
-        event_date: event.date,
-        event_venue: `${event.venue}, ${event.city}`,
-        reg_fee: event.reg_fee,
-        category,
-        belt_rank,
-      }),
-    ]).catch((err) => console.error("Email notification error:", err.message));
+    // Promise.all([
+    //   notifyEventRegistration({
+    //     registration_id,
+    //     first_name,
+    //     last_name,
+    //     email,
+    //     phone,
+    //     dob,
+    //     gender,
+    //     state,
+    //     city,
+    //     belt_rank,
+    //     category,
+    //     club_name,
+    //     coach_name,
+    //     emergency_contact,
+    //     notes,
+    //     event_title: event.title,
+    //     reg_fee: event.reg_fee,
+    //   }),
+    //   confirmEventRegistration({
+    //     first_name,
+    //     last_name,
+    //     email,
+    //     registration_id,
+    //     event_title: event.title,
+    //     event_date: event.date,
+    //     event_venue: `${event.venue}, ${event.city}`,
+    //     reg_fee: event.reg_fee,
+    //     category,
+    //     belt_rank,
+    //   }),
+    // ]).catch((err) => console.error("Email notification error:", err.message));
 
     res.status(201).json({
       message: "Registration successful!",
