@@ -56,7 +56,7 @@ function footer() {
   <div style="background:#0d0d0d;padding:20px 32px;border-top:1px solid #222;text-align:center;">
     <p style="color:#555;font-size:11px;margin:0;">Professional Taekwondo Federation India</p>
     <p style="color:#555;font-size:11px;margin:4px 0 0;">
-      <a href="mailto:protkdindia@gmail.com" style="color:#D4AF37;">protkdindia@gmail.com</a> &nbsp;|&nbsp; +91 7006507535
+      <a href="mailto:protkdindia@gmail.com" style="color:#D4AF37;">protkdindia@gmail.com</a> &nbsp;|&nbsp; +91 7006507635
     </p>
   </div>`;
 }
@@ -174,7 +174,7 @@ async function confirmContact({ name, email, subject }) {
         <p style="color:#ccc;font-size:14px;line-height:1.7;margin:0 0 24px;">
           If your matter is urgent, you can reach us directly at
           <a href="mailto:protkdindia@gmail.com" style="color:#D4AF37;">protkdindia@gmail.com</a>
-          or call <a href="tel:+917006507535" style="color:#D4AF37;">+91 7006507535</a>.
+          or call <a href="tel:+917006507635" style="color:#D4AF37;">+91 7006507635</a>.
         </p>
         <div style="background:#1a1506;border-left:3px solid #D4AF37;padding:12px 16px;border-radius:2px;">
           <p style="color:#D4AF37;font-size:11px;text-transform:uppercase;letter-spacing:2px;margin:0 0 4px;">PTF India HQ</p>
@@ -261,7 +261,7 @@ async function confirmMembershipApplication({ name, email, application_id, tier,
         <p style="color:#777;font-size:12px;margin:0;">
           Questions? Email us at
           <a href="mailto:protkdindia@gmail.com" style="color:#D4AF37;">protkdindia@gmail.com</a>
-          or call <a href="tel:+917006507535" style="color:#D4AF37;">+91 7006507535</a>
+          or call <a href="tel:+917006507635" style="color:#D4AF37;">+91 7006507635</a>
         </p>
       `)}
       ${footer()}
